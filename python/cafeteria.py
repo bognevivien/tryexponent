@@ -1,33 +1,3 @@
-from typing import List
-# Write any import statements here
-
-def getMaxAdditionalDinersCount(N: int, K: int, M: int, S: List[int]) -> int:
-    S.sort()
-    additional_diners = 0
-    
-    # Check the gap before the first occupied seat
-    if S[0] > 1:
-        additional_diners += (S[0] - 1) // (K + 1)
-    
-    # Check the gaps between occupied seats
-    for i in range(1, M):
-        gap = S[i] - S[i - 1] - 1
-        if gap > 2 * K:
-            additional_diners += (gap - 2 * K) // (K + 1)
-    
-    # Check the gap after the last occupied seat
-    if S[-1] < N:
-        additional_diners += (N - S[-1]) // (K + 1)
-    
-    return additional_diners
-N = 10
-K = 1
-M = 2
-S = [2, 6]
-
-print(getMaxAdditionalDinersCount(N, K, M, S))
-
-
 """
 PROBLEM STATEMENT:
 -------------------
@@ -70,3 +40,34 @@ Three additional diners may sit at seats 4, 8, and 10 without violating the soci
 
 In the second case, only 1 additional diner is able to join the table, by sitting in any of the first 3 seats.
 """
+
+from typing import List
+# Write any import statements here
+
+def getMaxAdditionalDinersCount(N: int, K: int, M: int, S: List[int]) -> int:
+    S.sort()
+    additional_diners = 0
+    
+    # Check the gap before the first occupied seat
+    if S[0] > 1:
+        additional_diners += (S[0] - 1) // (K + 1)
+    
+    # Check the gaps between occupied seats
+    for i in range(1, M):
+        gap = S[i] - S[i - 1] - 1
+        if gap > 2 * K:
+            additional_diners += (gap - 2 * K) // (K + 1)
+    
+    # Check the gap after the last occupied seat
+    if S[-1] < N:
+        additional_diners += (N - S[-1]) // (K + 1)
+    
+    return additional_diners
+N = 10
+K = 1
+M = 2
+S = [2, 6]
+
+print(getMaxAdditionalDinersCount(N, K, M, S))
+
+
