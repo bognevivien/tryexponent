@@ -23,3 +23,28 @@ Constraints:
 1 ≤ S.length ≤ 12
 [output] integer
 """
+
+
+def decode_variations(S: str) -> int:
+    n = len(S)
+    dp = [0] * (n+1)
+
+    dp[0] = 1
+    dp[1] = 1
+
+    for i in range(2, n+1):
+        # Single digit
+        if S[i] != '0':
+            dp[i] += dp[i-1]
+
+        # two digit
+        two_digit = int(S[i-2:i])
+        if 10 <= two_digit <= 26:
+            dp[i] += dp[i-2]
+
+        
+    return dp[n]
+
+
+
+print(decode_variations('1'))
